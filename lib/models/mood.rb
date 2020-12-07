@@ -1,2 +1,3 @@
 class Mood
+    
 end
