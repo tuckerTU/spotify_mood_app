@@ -9,5 +9,15 @@ class Playlist
     def initialize(name, id)
         @name = name
         @id = id 
+        self.class.all << self
     end
+
+    def self.find_by_id(id)
+        all.find{|playlist| playlist.id == id}
+    end
+
+    def self.find_or_create(name, id)
+        find_by_id(id) || new(name, id)
+    end
+
 end
