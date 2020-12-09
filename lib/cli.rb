@@ -10,24 +10,30 @@ class CLI
         "Melancholy" => "5CyR6yCIZQwRdSJSjC5ssl"
     }
 
+    def initialize
+        @rspotify = Rspotify.new
+        @rspotify.authenticate
+    end
+
     def start 
         welcome
-        display_playlists
-        user_selection 
+        display_moods
+        mood_selection
+        @rspotify.return_random_song() 
     end
 
     def welcome 
         puts "Welcome to the Mood app!"
     end
 
-    def display_playlists 
+    def display_moods 
         puts "Here are some moods:"
         PLAYLISTS.keys.each.with_index(1) do |key, index|
             puts "#{index}. #{key}"
         end
     end
 
-    def user_selection 
+    def mood_selection 
         puts "How are you feeling? Type the corresponding number!"
         local_input = gets.strip.to_i
         if local_input.between?(1, PLAYLISTS.keys.length) 
@@ -36,7 +42,7 @@ class CLI
             API.find_playlist_by_id(playlist_id)
         else
             puts "Hmm... unfortunately, that's not an option."
-            user_selection
+            mood_selection
         end
     end
 

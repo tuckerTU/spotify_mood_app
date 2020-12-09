@@ -1,7 +1,9 @@
 require 'dotenv/load'
+require 'rspotify'
+
 class API
     def self.api_call(url)
-        token = "BQDRREcxeh-DgG-CsO-BNNLUfeTmRuN9RmGnQvqXd5IGypb4Mdf7_-Dam8w8kYXJ3fSKtHA-GqGa1GTQ1s7OvTmNrpl9bH6FTj6REbbQ_pNq32DWng0UPTyUDJLwVaKLjLQTuEjDdI1c0lvAbb_G7oLGBLD0QYbsIpnFQlxdTAJbqOw"
+        token = "BQBhGi8xx6d-CzZ_smB9OPCF-09XZFd1Xa_FRpmw3UabKtZDfWrZ4A7nqOTIZLsaqmJLnMmFTXGQK7VMgB_U-dBky1NIkOM-ozESFioFWR7169pPiuzVXptfR9dbsR1styZzpcS4BWIc3C_qg84hPOgmUtR00xu_hNmtAy1_q5B4LX0"
         req = Net::HTTP::Get.new(uri)
         req['Authorization'] = "Bearer #{token}" 
         http = Net::HTTP.new(uri.host, uri.port)
