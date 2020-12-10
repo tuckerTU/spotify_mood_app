@@ -17,12 +17,8 @@ class Rspotify
         artist_name = playlist.tracks[random].artists[0].name
         song_name = playlist.tracks[random].name
         puts "#{artist_name}- \"#{song_name}\"" 
-        binding.pry
     end
     
 end
 
 
-rspotify = Rspotify.new
-rspotify.authenticate
-rspotify.return_random_song('kaythalex_', '3Xt0duCIylMNefC4WmjiYt')

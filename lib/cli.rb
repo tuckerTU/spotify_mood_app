@@ -1,13 +1,13 @@
 class CLI
     PLAYLISTS = {
-        "Chill" => "37i9dQZF1DX889U0CL85jj",
-        "Angry" => "36lqaSvXXuBxi3oYIaEI4B",
-        "Groovy" => "3Xt0duCIylMNefC4WmjiYt",
-        "Romantic" => "2PV8zQaMhtLjQ5H2z7Js4E",
-        "Depressed" => "2Hkk04yn1uNBxQwEql433E",
-        "Happy" => "6HWkP17KelQ2PYotO3Usaw",
-        "Pumped Up" => "6BC5W6YXCqyPrHDDwQhJlE",
-        "Melancholy" => "5CyR6yCIZQwRdSJSjC5ssl"
+        "Chill" => {user: "Spotify", playlist_id: "37i9dQZF1DX889U0CL85jj"}, 
+        "Angry" => {user: "1255914082", playlist_id: "36lqaSvXXuBxi3oYIaEI4B"},
+        "Groovy" => {user: "kaythalex_", playlist_id: "3Xt0duCIylMNefC4WmjiYt"},
+        "Romantic" => {user: "sanik007", playlist_id: "2PV8zQaMhtLjQ5H2z7Js4E"},
+        "Depressed" => {user: "q4vft5sfth0myh3s2wr5p9hpo", playlist_id: "2Hkk04yn1uNBxQwEql433E"},
+        "Happy" => {user: "oliviatorri_", playlist_id: "6HWkP17KelQ2PYotO3Usaw"},
+        "Pumped Up" => {user: "lauratasney", playlist_id: "6BC5W6YXCqyPrHDDwQhJlE"},
+        "Melancholy" => {user: "ladeniselara", playlist_id: "5CyR6yCIZQwRdSJSjC5ssl"}
     }
 
     def initialize
@@ -37,9 +37,11 @@ class CLI
         puts "How are you feeling? Type the corresponding number!"
         local_input = gets.strip.to_i
         if local_input.between?(1, PLAYLISTS.keys.length) 
-            mood = PLAYLISTS.keys[local_input - 1]
-            playlist_id = PLAYLISTS[mood]
-            API.find_playlist_by_id(playlist_id)
+            mood = PLAYLISTS[PLAYLISTS.keys[local_input - 1]]
+            playlist_id = mood[:playlist_id]
+            user = mood[:user]
+            @rspotify.return_random_song(user, playlist_id)
+            #API.find_playlist_by_id(playlist_id)
         else
             puts "Hmm... unfortunately, that's not an option."
             mood_selection
