@@ -18,8 +18,7 @@ class CLI
     def start 
         welcome
         display_moods
-        mood_selection
-        @rspotify.return_random_song() 
+        mood_selection       
     end
 
     def welcome 
