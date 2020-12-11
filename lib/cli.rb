@@ -1,3 +1,6 @@
+require "tty-prompt"
+prompt = TTY::Prompt.new
+
 class CLI
     PLAYLISTS = {
         "Chill" => {user: "Spotify", playlist_id: "37i9dQZF1DX889U0CL85jj"}, 
@@ -46,5 +49,14 @@ class CLI
             mood_selection
         end
     end
+        # potential follow up questions: 
+        # What would you like to do now? :
+        # 1. Play another song in this mood.
+        # 2. Choose a different mood.
+        # 3. Play another song from this artist.
+        # 4. Recommend similar artists.
+        def  follow_up_prompt
+        
+        end          
 
 end

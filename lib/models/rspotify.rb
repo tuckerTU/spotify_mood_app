@@ -3,10 +3,6 @@ require_relative '../environment'
 
 class Rspotify
 
-    def initialize 
-        
-    end
-
     def authenticate 
         RSpotify.authenticate(ENV['CLIENT_ID'], ENV['CLIENT_PASSWORD'])
     end
