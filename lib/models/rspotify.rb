@@ -15,6 +15,8 @@ class Rspotify
         puts "#{artist_name}- \"#{song_name}\"" 
     end
     
+    
+
 end
 
 

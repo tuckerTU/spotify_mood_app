@@ -1,5 +1,5 @@
-require "tty-prompt"
-prompt = TTY::Prompt.new
+require 'tty-prompt'
+require 'pry'
 
 class CLI
     PLAYLISTS = {
@@ -22,7 +22,7 @@ class CLI
         welcome
         display_moods
         mood_selection  
-        follow_up_prompt     
+        follow_up_prompt
     end
 
     def welcome 
@@ -37,7 +37,7 @@ class CLI
     end
 
     def mood_selection 
-        puts "How are you feeling? Type the corresponding number!"
+        puts "How are you feeling? Type the corresponding number and we'll suggest a song :)"
         local_input = gets.strip.to_i
         if local_input.between?(1, PLAYLISTS.keys.length) 
             mood = PLAYLISTS[PLAYLISTS.keys[local_input - 1]]
@@ -51,15 +51,24 @@ class CLI
         end
     end
 
-        def follow_up_prompt
-            prompt = TTY::Prompt.new
-                prompt.select("What would you like to do now?") do |menu|
-                    menu.enum "."
-                        menu.choice "Suggest another song that matches this mood.", 1
-                        menu.choice "Select a different mood.", 2
-                        menu.choice "Recommend some similar artists.", 3
-                        menu.choice "Exit"
-                end
-        end          
+    def follow_up_prompt
+        prompt = TTY::Prompt.new
+        follow_up = prompt.select("What would you like to do now?") do |menu|
+            menu.choice "Suggest another song that matches this mood."
+            menu.choice "Select a different mood."
+            menu.choice "Recommend some similar artists."
+            menu.choice "Exit"
+        end
+
+        if follow_up == "Suggest another song that matches this mood."
+            puts "coming soon"
+        elsif follow_up == "Select a different mood."
+            start
+        elsif follow_up == "Recommend some similar artists."
+            puts "coming soon"
+        elsif follow_up == "Exit"
+            puts "See ya next time!"
+        end
+    end          
 
 end
