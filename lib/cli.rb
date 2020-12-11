@@ -26,7 +26,7 @@ class CLI
     end
 
     def welcome 
-        puts "Welcome to the Mood app!"
+        puts "Welcome to the Mood app! We're here to help you find some music that matches your current mood!"
     end
 
     def display_moods 
