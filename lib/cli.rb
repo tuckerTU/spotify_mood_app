@@ -50,17 +50,13 @@ class CLI
             mood_selection
         end
     end
-        # potential follow up questions: 
-        # What would you like to do now? :
-        # 1. Play another song in this mood.
-        # 2. Choose a different mood.
-        # 3. Recommend similar artists.
+
         def follow_up_prompt
             prompt = TTY::Prompt.new
                 prompt.select("What would you like to do now?") do |menu|
                     menu.enum "."
-                        menu.choice "Play another song in this mood.", 1
-                        menu.choice "Choose a different mood.", 2
+                        menu.choice "Suggest another song that matches this mood.", 1
+                        menu.choice "Select a different mood.", 2
                         menu.choice "Recommend some similar artists.", 3
                         menu.choice "Exit"
                 end
