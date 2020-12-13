@@ -1,7 +1,9 @@
 require 'tty-prompt'
 require 'pry'
+require 'rspotify'
 
 class CLI
+
     PLAYLISTS = {
         "Chill" => {user: "Spotify", playlist_id: "37i9dQZF1DX889U0CL85jj"}, 
         "Angry" => {user: "1255914082", playlist_id: "36lqaSvXXuBxi3oYIaEI4B"},
@@ -37,14 +39,13 @@ class CLI
     end
 
     def mood_selection 
-        puts "How are you feeling? Type the corresponding number and we'll suggest a song :)"
+        puts "How are you feeling? Enter the corresponding number and we'll suggest a song :)"
         local_input = gets.strip.to_i
         if local_input.between?(1, PLAYLISTS.keys.length) 
             mood = PLAYLISTS[PLAYLISTS.keys[local_input - 1]]
-            playlist_id = mood[:playlist_id]
-            user = mood[:user]
-            @rspotify.return_random_song(user, playlist_id)
-            #API.find_playlist_by_id(playlist_id)
+            @playlist_id = mood[:playlist_id]
+            @user = mood[:user]
+            @rspotify.return_random_song(@user, @playlist_id)
         else
             puts "Hmm... unfortunately, that's not an option."
             mood_selection
@@ -56,16 +57,14 @@ class CLI
         follow_up = prompt.select("What would you like to do now?") do |menu|
             menu.choice "Suggest another song that matches this mood."
             menu.choice "Select a different mood."
-            menu.choice "Recommend some similar artists."
             menu.choice "Exit"
         end
 
         if follow_up == "Suggest another song that matches this mood."
-            puts "coming soon"
+            puts @rspotify.return_random_song(@user, @playlist_id)
+                    follow_up_prompt
         elsif follow_up == "Select a different mood."
             start
-        elsif follow_up == "Recommend some similar artists."
-            puts "coming soon"
         elsif follow_up == "Exit"
             puts "See ya next time!"
         end

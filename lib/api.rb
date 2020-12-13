@@ -19,5 +19,6 @@ class API
         #    Song.find_or_create({id: song_hash["track"]["id"], name: song_hash["track"]["name"], popularity:song_hash["track"]["popularity"], playlist:playlist})
         end
     end
+
 end 
 
