@@ -7,10 +7,9 @@ require 'rspotify'
 
 require_relative "./api"
 require_relative "./cli"
-require_relative "./models/artist"
 require_relative "./models/rspotify"
 require_relative "./models/playlist"
-require_relative "./models/song"
+
 
 
 module MoodApp
