@@ -65,6 +65,7 @@ class CLI
                     follow_up_prompt
         elsif follow_up == "Select a different mood."
             start
+
         elsif follow_up == "Exit"
             puts "See ya next time!"
         end
