@@ -22,7 +22,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Once you're inside the mood_app root folder, run ./bin/start in the terminal and the app should automatically start.
 
 ## Development
 
