@@ -1,8 +1,6 @@
-require 'tty-prompt'
-require 'pry'
-require 'rspotify'
-
 class CLI
+
+    attr_reader :playlist, :playlist_id
 
     PLAYLISTS = {
         "Chill" => {user: "Spotify", playlist_id: "37i9dQZF1DX889U0CL85jj"}, 
@@ -14,11 +12,6 @@ class CLI
         "Pumped Up" => {user: "lauratasney", playlist_id: "6BC5W6YXCqyPrHDDwQhJlE"},
         "Melancholy" => {user: "ladeniselara", playlist_id: "5CyR6yCIZQwRdSJSjC5ssl"}
     }
-
-    def initialize
-        @rspotify = Rspotify.new
-        @rspotify.authenticate
-    end
 
     def start 
         welcome
@@ -45,11 +38,18 @@ class CLI
             mood = PLAYLISTS[PLAYLISTS.keys[local_input - 1]]
             @playlist_id = mood[:playlist_id]
             @user = mood[:user]
-            @rspotify.return_random_song(@user, @playlist_id)
+            API.find_playlist_by_id(playlist_id)
+            @playlist = Playlist.find_by_id(playlist_id)
+            song = randomize
+            song.display_song
         else
             puts "Hmm... unfortunately, that's not an option."
             mood_selection
         end
+    end
+
+    def randomize
+        playlist.songs[rand(0..playlist.songs.length)]
     end
 
     def follow_up_prompt
@@ -61,11 +61,10 @@ class CLI
         end
 
         if follow_up == "Suggest another song that matches this mood."
-            puts @rspotify.return_random_song(@user, @playlist_id)
+            puts randomize.display_song
                     follow_up_prompt
         elsif follow_up == "Select a different mood."
             start
-
         elsif follow_up == "Exit"
             puts "See ya next time!"
         end

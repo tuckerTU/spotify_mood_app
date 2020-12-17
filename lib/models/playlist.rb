@@ -1,4 +1,5 @@
 class Playlist
+    
     attr_accessor :name, :id
     @@all = []
 
@@ -18,6 +19,10 @@ class Playlist
 
     def self.find_or_create(name, id)
         find_by_id(id) || new(name, id)
+    end
+
+    def songs 
+        Song.all.select{|song| song.playlist == self}
     end
 
 end
