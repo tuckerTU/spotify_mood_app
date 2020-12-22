@@ -1,4 +1,5 @@
 class API
+    
     def self.api_call(url)
         token = ENV["AUTH_TOKEN"]
         uri = URI(url) 

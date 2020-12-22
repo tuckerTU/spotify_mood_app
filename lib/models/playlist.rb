@@ -1,6 +1,7 @@
 class Playlist
     
     attr_accessor :name, :id
+
     @@all = []
 
     def self.all 
@@ -25,4 +26,4 @@ class Playlist
         Song.all.select{|song| song.playlist == self}
     end
 
-end
+end 
