@@ -1,6 +1,6 @@
 class Playlist
     
-    attr_accessor :name, :id
+    attr_reader :name, :id
 
     @@all = []
 

@@ -1,3 +1,5 @@
+require 'pry'
+
 class Song
 
 @@all = []
@@ -26,6 +28,14 @@ class Song
 
     def display_song
         puts "#{self.artist_name}- \"#{self.name}\"" 
+    end
+
+    def self.return_artist_songs(input)
+        self.all.select do |songs|
+            if input == songs
+                songs
+            end
+        end
     end
 
 end

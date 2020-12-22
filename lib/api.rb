@@ -14,7 +14,7 @@ class API
     def self.find_playlist_by_id(id)
         playlist_hash = api_call("https://api.spotify.com/v1/playlists/#{id}")
         playlist = Playlist.find_or_create(playlist_hash["name"], playlist_hash["id"])
-        playlist_hash["tracks"]["items"].collect do |song_hash| 
+        playlist_hash["tracks"]["items"].each do |song_hash| 
             Song.find_or_create({artist_name: song_hash["track"]["artists"][0]["name"],id: song_hash["track"]["id"], name: song_hash["track"]["name"], popularity:song_hash["track"]["popularity"], playlist:playlist})
         end
     end
