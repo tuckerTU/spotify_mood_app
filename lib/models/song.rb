@@ -30,12 +30,13 @@ class Song
         puts "#{self.artist_name}- \"#{self.name}\"" 
     end
 
-    def self.return_artist_songs(input)
-        self.all.select do |songs|
-            if input == songs
-                songs
-            end
+    def self.return_artist_songs(artist)
+       song_array = all.select do |song|
+          song.artist_name.casecmp? artist
         end
-    end
+        song_array.each do |song|
+            puts "\"#{song.name}\""
+        end
+     end
 
 end

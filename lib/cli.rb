@@ -57,7 +57,7 @@ class CLI
         follow_up = prompt.select("What would you like to do now?") do |menu|
             menu.choice "Suggest another song that matches this mood."
             menu.choice "Select a different mood."
-            menu.choice "View all songs available for a specific artist."
+            menu.choice "View all songs available for a specific artist in this mood."
             menu.choice "Exit"
         end
 
@@ -65,11 +65,12 @@ class CLI
             puts randomize.display_song
                     follow_up_prompt
         elsif follow_up == "Select a different mood."
-            start
-        elsif follow_up == "View all songs available for a specific artist."
+            start 
+        elsif follow_up == "View all songs available for a specific artist in this mood."
             puts "Please type your artist name of choice."
             input = gets.strip
             Song.return_artist_songs(input)
+            follow_up_prompt
         elsif follow_up == "Exit"
             puts "See ya next time!"
         end
